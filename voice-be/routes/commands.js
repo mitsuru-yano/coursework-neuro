@@ -13,7 +13,7 @@ const pool = require('../db.js')
 const router = express.Router()
 
 // ---------- Actions ----------
-router.post('/actions', async (req, res) => {
+router.post('/actions', authMiddleware, async (req, res) => {
     try {
         const { name, description } = req.body
         const action = await createAction(name, description)
@@ -23,18 +23,18 @@ router.post('/actions', async (req, res) => {
     }
 })
 
-router.get('/actions', async (_, res) => {
+router.get('/actions', authMiddleware, async (_, res) => {
     const list = await listActions()
     res.json(list)
 })
 
-router.delete('/actions/:id', async (req, res) => {
+router.delete('/actions/:id', authMiddleware, async (req, res) => {
     await deleteAction(req.params.id)
     res.json({ status: 'ok' })
 })
 
 // ---------- Commands ----------
-router.post('/commands', async (req, res) => {
+router.post('/commands', authMiddleware, async (req, res) => {
     try {
         const { phrase, actionId } = req.body
         const command = await createCommand(phrase, actionId)
@@ -66,12 +66,12 @@ router.patch('/commands/:id', authMiddleware, async (req, res) => {
     }
 })
 
-router.get('/commands', async (_, res) => {
+router.get('/commands', authMiddleware, async (_, res) => {
     const list = await listCommands()
     res.json(list)
 })
 
-router.delete('/commands/:id', async (req, res) => {
+router.delete('/commands/:id', authMiddleware, async (req, res) => {
     await deleteCommand(req.params.id)
     res.json({ status: 'ok' })
 })
