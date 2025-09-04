@@ -1,0 +1,16 @@
+### FILE: requirements.txt
+fastapi
+uvicorn[standard]
+transformers
+torch
+torchaudio
+soundfile
+python-multipart
+pydantic
+numpy
+aiofiles
+pydub
+ffmpeg-python
+python-dotenv         # для загрузки конфигов из .env
+dotenv
+protobuf

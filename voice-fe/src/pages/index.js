@@ -1,0 +1,6 @@
+export { Dashboard } from './dashboard'
+export { Login } from './login'
+export { Settings } from './settings'
+export { Register } from './register'
+export { Homepage } from './homepage'
+export { VoiceControl } from './voice'
