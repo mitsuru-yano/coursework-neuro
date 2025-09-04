@@ -7,7 +7,6 @@ voice-neuro/src/dataset
 voice-neuro/models
 
 voice-fe/node_modules
-voice-fe/public
 voice-fe/.env
 voice-fe/yarn.lock
 voice-fe/package-lock.json
