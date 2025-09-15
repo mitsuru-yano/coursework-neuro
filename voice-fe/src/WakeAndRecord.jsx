@@ -2,9 +2,10 @@ import { useAuthContext } from '@context/AuthContext'
 import { useTTSContext } from '@context/TTSContext'
 import { fetchHelper } from '@utils/fetchHelper'
 import { recordUntilSilence } from '@utils/recordUntilSilence'
+import * as apiRequests from "@utils/apiRequests"
 import React, { useEffect, useRef, useState } from 'react'
 
-const WS_URL = 'ws://127.0.0.1:3000/ws'
+const WS_URL = 'ws://neuro.huskyduckstudio.by/ws'
 const PREDICT_URL = '/api/predict'
 
 export default function WakeAndRecord() {

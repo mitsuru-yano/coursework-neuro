@@ -9,7 +9,7 @@ import { useUIThemeContext } from '@context/UIThemeContext'
 import Router from './router'
 
 function App() {
-    const { theme, setTheme, selectThemeHandler } = useUIThemeContext()
+    const { theme } = useUIThemeContext()
 
     return (
         <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>

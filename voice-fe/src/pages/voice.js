@@ -1,10 +1,11 @@
 import { STTSettings } from '@modules/STTSettings'
-import VoiceRecorder from 'VoiceRecorder'
+import {ActionsSettings} from '@modules/ActionsSettings'
 
 export const VoiceControl = () => {
     return (
         <>
             <STTSettings />
+            <ActionsSettings />
         </>
     )
 }

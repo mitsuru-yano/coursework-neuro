@@ -111,10 +111,16 @@ export const STTSettings = () => {
         }
     }
 
-    // Фильтрация по поиску
-    const filteredCommands = commandsList.filter(
-        (cmd) => !search || cmd.phrase.toLowerCase().includes(search.toLowerCase())
-    )
+    const [actionFilter, setActionFilter] = useState('') // фильтр по action
+
+// Фильтрация по поиску + action
+const filteredCommands = commandsList.filter((cmd) => {
+    const matchesSearch = !search || cmd.phrase.toLowerCase().includes(search.toLowerCase())
+    const matchesAction =
+        !actionFilter || (cmd.action_name && cmd.action_id === Number(actionFilter))
+    return matchesSearch && matchesAction
+})
+
 
     return (
         <>
@@ -123,14 +129,27 @@ export const STTSettings = () => {
                     <Heading as="span">Speech To Text Settings</Heading>
                 </CardHeading>
                 <CardBody>
-                    <div style={{ marginBottom: 12 }}>
-                        <Input
-                            label="Поиск команды..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            fullWidth
-                        />
-                    </div>
+                <div style={{ marginBottom: 12, display: 'flex', gap: 12 }}>
+    <Input
+        label="Поиск команды..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        fullWidth
+    />
+
+    <select
+        value={actionFilter}
+        onChange={(e) => setActionFilter(e.target.value)}
+        style={{ minWidth: 150 }}
+    >
+        <option value="">— все действия —</option>
+        {actionsList.map((a) => (
+            <option key={a.id} value={a.id}>
+                {a.name}
+            </option>
+        ))}
+    </select>
+</div>
 
                     <Container>
                         {/* Левая колонка — список команд */}
