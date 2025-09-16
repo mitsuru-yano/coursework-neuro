@@ -158,6 +158,12 @@ export default function WakeAndRecord() {
                 const joke = await getJoke()
                 speakMultilang(joke)
             }
+            if (data.action === "time") {
+                const now = new Date();
+                const hours = now.getHours().toString().padStart(2, "0");
+                const minutes = now.getMinutes().toString().padStart(2, "0");
+                return speakMultilang(`Сейчас: ${hours}:${minutes}`);
+            }
             setLastResult(data || error)
             setStatus('idle')
         } catch (err) {
