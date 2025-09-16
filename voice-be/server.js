@@ -28,6 +28,18 @@ const initDB = require('./db/init')
 const app = express()
 app.use(express.json())
 
+app.use((req, res, next) => {
+    const start = Date.now()
+    res.on('finish', () => {
+        const duration = Date.now() - start
+        console.log(
+            `[${new Date().toISOString()}] ${req.method} ${req.originalUrl} ${
+                res.statusCode
+            } - ${duration}ms`
+        )
+    })
+    next()
+})
 // ---------- Unified CORS with multiple origins ----------
 const allowedOrigins = [
     process.env.CLIENT_URL || 'http://localhost:5173',

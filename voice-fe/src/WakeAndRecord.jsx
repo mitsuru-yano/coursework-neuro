@@ -2,7 +2,7 @@ import { useAuthContext } from '@context/AuthContext'
 import { useTTSContext } from '@context/TTSContext'
 import { fetchHelper } from '@utils/fetchHelper'
 import { recordUntilSilence } from '@utils/recordUntilSilence'
-import * as apiRequests from "@utils/apiRequests"
+import {getJoke} from "@utils/apiRequests"
 import React, { useEffect, useRef, useState } from 'react'
 
 const WS_URL = 'ws://neuro.huskyduckstudio.by/ws'
@@ -154,6 +154,10 @@ export default function WakeAndRecord() {
                 body: form,
                 token,
             })
+            if (data.action === "joke") {
+                const joke = await getJoke()
+                speakMultilang(joke)
+            }
             setLastResult(data || error)
             setStatus('idle')
         } catch (err) {
